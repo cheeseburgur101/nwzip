@@ -28,13 +28,7 @@ namespace nwzip
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
-			ViewFilesizes.DropDown.Closing += PreventDropDownClosing;
 		}
-		void PreventDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
-		{
-			e.Cancel = true;
-		}
-		
 		// When clicked change viewable filesize from bits to bytes
 		void ViewFilesizesBytesCheckedChanged(object sender, EventArgs e) 
 		{
