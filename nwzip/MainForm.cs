@@ -28,6 +28,43 @@ namespace nwzip
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
+			ViewFilesizes.DropDown.Closing += PreventDropDownClosing;
 		}
+		void PreventDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
+		{
+			e.Cancel = true;
+		}
+		
+		// When clicked change viewable filesize from bits to bytes
+		void ViewFilesizesBytesCheckedChanged(object sender, EventArgs e) 
+		{
+			ViewFilesizesBits.Checked = !ViewFilesizesBytes.Checked;
+		}
+		
+		// When clicked change viewable filesize from bytes to bits
+		void ViewFilesizesBitsCheckedChanged(object sender, EventArgs e)
+		{
+			ViewFilesizesBytes.Checked = !ViewFilesizesBits.Checked;
+		}
+		
+		// Add a file to the archive
+		void AddFileClick(object sender, EventArgs e)
+		{
+			
+		}
+		
+		// open the archive encryption window
+		void ArchiveEncryptionClick(object sender, EventArgs e)
+		{
+	
+		}
+		
+		// open the archive details window
+		void ArchiveDetailsClick(object sender, EventArgs e)
+		{
+	
+		}
+		
+		
 	}
 }

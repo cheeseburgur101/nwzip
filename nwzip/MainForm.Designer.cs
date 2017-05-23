@@ -16,18 +16,19 @@ namespace nwzip
 		private System.ComponentModel.IContainer components = null;
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem NewFile;
+		private System.Windows.Forms.ToolStripMenuItem OpenFile;
+		private System.Windows.Forms.ToolStripMenuItem SaveFile;
+		private System.Windows.Forms.ToolStripMenuItem SaveAsFile;
 		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem archiveToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem addFileToArchiveToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem encryptionToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem filesizeToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem fileTypeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem AddFile;
+		private System.Windows.Forms.ToolStripMenuItem ArchiveEncryption;
+		private System.Windows.Forms.ToolStripMenuItem ArchiveDetails;
+		private System.Windows.Forms.ToolStripMenuItem ViewFilesizes;
+		private System.Windows.Forms.ToolStripMenuItem ViewFilesizesBits;
+		private System.Windows.Forms.ToolStripMenuItem ViewFilesizesBytes;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -50,20 +51,22 @@ namespace nwzip
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.NewFile = new System.Windows.Forms.ToolStripMenuItem();
+			this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
+			this.SaveFile = new System.Windows.Forms.ToolStripMenuItem();
+			this.SaveAsFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.AddFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ViewFilesizes = new System.Windows.Forms.ToolStripMenuItem();
+			this.ViewFilesizesBits = new System.Windows.Forms.ToolStripMenuItem();
+			this.ViewFilesizesBytes = new System.Windows.Forms.ToolStripMenuItem();
 			this.archiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.encryptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addFileToArchiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.filesizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.fileTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ArchiveEncryption = new System.Windows.Forms.ToolStripMenuItem();
+			this.ArchiveDetails = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -83,93 +86,110 @@ namespace nwzip
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.newToolStripMenuItem,
-			this.openToolStripMenuItem,
-			this.saveToolStripMenuItem,
-			this.saveToolStripMenuItem1});
+			this.NewFile,
+			this.OpenFile,
+			this.SaveFile,
+			this.SaveAsFile});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "File";
 			// 
-			// newToolStripMenuItem
+			// NewFile
 			// 
-			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.newToolStripMenuItem.Text = "New";
+			this.NewFile.Name = "NewFile";
+			this.NewFile.Size = new System.Drawing.Size(123, 22);
+			this.NewFile.Text = "New";
 			// 
-			// openToolStripMenuItem
+			// OpenFile
 			// 
-			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.openToolStripMenuItem.Text = "Open";
+			this.OpenFile.Name = "OpenFile";
+			this.OpenFile.Size = new System.Drawing.Size(123, 22);
+			this.OpenFile.Text = "Open";
 			// 
-			// saveToolStripMenuItem
+			// SaveFile
 			// 
-			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.saveToolStripMenuItem.Text = "Save";
+			this.SaveFile.Name = "SaveFile";
+			this.SaveFile.Size = new System.Drawing.Size(123, 22);
+			this.SaveFile.Text = "Save";
 			// 
-			// saveToolStripMenuItem1
+			// SaveAsFile
 			// 
-			this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-			this.saveToolStripMenuItem1.Text = "Save As...";
+			this.SaveAsFile.Name = "SaveAsFile";
+			this.SaveAsFile.Size = new System.Drawing.Size(123, 22);
+			this.SaveAsFile.Text = "Save As...";
 			// 
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.addFileToArchiveToolStripMenuItem});
+			this.AddFile});
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
 			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
 			this.editToolStripMenuItem.Text = "Edit";
 			// 
+			// AddFile
+			// 
+			this.AddFile.Name = "AddFile";
+			this.AddFile.Size = new System.Drawing.Size(181, 22);
+			this.AddFile.Text = "Add File to archive...";
+			this.AddFile.Click += new System.EventHandler(this.AddFileClick);
+			// 
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.filesizeToolStripMenuItem,
-			this.fileTypeToolStripMenuItem});
+			this.ViewFilesizes});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "View";
 			// 
+			// ViewFilesizes
+			// 
+			this.ViewFilesizes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.ViewFilesizesBits,
+			this.ViewFilesizesBytes});
+			this.ViewFilesizes.Name = "ViewFilesizes";
+			this.ViewFilesizes.Size = new System.Drawing.Size(115, 22);
+			this.ViewFilesizes.Text = "File Size";
+			// 
+			// ViewFilesizesBits
+			// 
+			this.ViewFilesizesBits.CheckOnClick = true;
+			this.ViewFilesizesBits.Name = "ViewFilesizesBits";
+			this.ViewFilesizesBits.Size = new System.Drawing.Size(102, 22);
+			this.ViewFilesizesBits.Text = "Bits";
+			this.ViewFilesizesBits.CheckedChanged += new System.EventHandler(this.ViewFilesizesBitsCheckedChanged);
+			// 
+			// ViewFilesizesBytes
+			// 
+			this.ViewFilesizesBytes.Checked = true;
+			this.ViewFilesizesBytes.CheckOnClick = true;
+			this.ViewFilesizesBytes.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.ViewFilesizesBytes.Name = "ViewFilesizesBytes";
+			this.ViewFilesizesBytes.Size = new System.Drawing.Size(102, 22);
+			this.ViewFilesizesBytes.Text = "Bytes";
+			this.ViewFilesizesBytes.CheckedChanged += new System.EventHandler(this.ViewFilesizesBytesCheckedChanged);
+			// 
 			// archiveToolStripMenuItem
 			// 
 			this.archiveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.aboutToolStripMenuItem,
-			this.encryptionToolStripMenuItem});
+			this.ArchiveEncryption,
+			this.ArchiveDetails});
 			this.archiveToolStripMenuItem.Name = "archiveToolStripMenuItem";
 			this.archiveToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
 			this.archiveToolStripMenuItem.Text = "Archive";
 			// 
-			// aboutToolStripMenuItem
+			// ArchiveEncryption
 			// 
-			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.aboutToolStripMenuItem.Text = "Encryption";
+			this.ArchiveEncryption.Name = "ArchiveEncryption";
+			this.ArchiveEncryption.Size = new System.Drawing.Size(152, 22);
+			this.ArchiveEncryption.Text = "Encryption";
+			this.ArchiveEncryption.Click += new System.EventHandler(this.ArchiveEncryptionClick);
 			// 
-			// encryptionToolStripMenuItem
+			// ArchiveDetails
 			// 
-			this.encryptionToolStripMenuItem.Name = "encryptionToolStripMenuItem";
-			this.encryptionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.encryptionToolStripMenuItem.Text = "Details";
-			// 
-			// addFileToArchiveToolStripMenuItem
-			// 
-			this.addFileToArchiveToolStripMenuItem.Name = "addFileToArchiveToolStripMenuItem";
-			this.addFileToArchiveToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-			this.addFileToArchiveToolStripMenuItem.Text = "Add File to archive...";
-			// 
-			// filesizeToolStripMenuItem
-			// 
-			this.filesizeToolStripMenuItem.Name = "filesizeToolStripMenuItem";
-			this.filesizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.filesizeToolStripMenuItem.Text = "File Size";
-			// 
-			// fileTypeToolStripMenuItem
-			// 
-			this.fileTypeToolStripMenuItem.Name = "fileTypeToolStripMenuItem";
-			this.fileTypeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.fileTypeToolStripMenuItem.Text = "File Type";
+			this.ArchiveDetails.Name = "ArchiveDetails";
+			this.ArchiveDetails.Size = new System.Drawing.Size(152, 22);
+			this.ArchiveDetails.Text = "Details";
+			this.ArchiveDetails.Click += new System.EventHandler(this.ArchiveDetailsClick);
 			// 
 			// MainForm
 			// 
@@ -177,9 +197,10 @@ namespace nwzip
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(900, 457);
 			this.Controls.Add(this.menuStrip1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
-			this.Text = "nwzip";
+			this.Text = "NWZip Version 0.0.0 - New Archive";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
