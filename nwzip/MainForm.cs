@@ -18,6 +18,7 @@ namespace nwzip
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		int WindowToOpen = 0;
 		public MainForm()
 		{
 			//
@@ -29,18 +30,7 @@ namespace nwzip
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
 		}
-		// When clicked change viewable filesize from bits to bytes
-		void ViewFilesizesBytesCheckedChanged(object sender, EventArgs e) 
-		{
-			ViewFilesizesBits.Checked = !ViewFilesizesBytes.Checked;
-		}
-		
-		// When clicked change viewable filesize from bytes to bits
-		void ViewFilesizesBitsCheckedChanged(object sender, EventArgs e)
-		{
-			ViewFilesizesBytes.Checked = !ViewFilesizesBits.Checked;
-		}
-		
+
 		// Add a file to the archive
 		void AddFileClick(object sender, EventArgs e)
 		{
@@ -57,6 +47,12 @@ namespace nwzip
 		void ArchiveDetailsClick(object sender, EventArgs e)
 		{
 	
+		}
+		void BackgroundWorker1DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		{
+			if(WindowToOpen==0){
+				
+			}
 		}
 		
 		

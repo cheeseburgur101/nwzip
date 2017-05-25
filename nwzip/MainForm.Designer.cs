@@ -26,9 +26,9 @@ namespace nwzip
 		private System.Windows.Forms.ToolStripMenuItem AddFile;
 		private System.Windows.Forms.ToolStripMenuItem ArchiveEncryption;
 		private System.Windows.Forms.ToolStripMenuItem ArchiveDetails;
-		private System.Windows.Forms.ToolStripMenuItem ViewFilesizes;
-		private System.Windows.Forms.ToolStripMenuItem ViewFilesizesBits;
-		private System.Windows.Forms.ToolStripMenuItem ViewFilesizesBytes;
+		private System.Windows.Forms.ToolStripMenuItem nWZipToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem installToolStripMenuItem;
+		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -61,12 +61,12 @@ namespace nwzip
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AddFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.ViewFilesizes = new System.Windows.Forms.ToolStripMenuItem();
-			this.ViewFilesizesBits = new System.Windows.Forms.ToolStripMenuItem();
-			this.ViewFilesizesBytes = new System.Windows.Forms.ToolStripMenuItem();
 			this.archiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ArchiveEncryption = new System.Windows.Forms.ToolStripMenuItem();
 			this.ArchiveDetails = new System.Windows.Forms.ToolStripMenuItem();
+			this.nWZipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.installToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -76,7 +76,8 @@ namespace nwzip
 			this.fileToolStripMenuItem,
 			this.editToolStripMenuItem,
 			this.viewToolStripMenuItem,
-			this.archiveToolStripMenuItem});
+			this.archiveToolStripMenuItem,
+			this.nWZipToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(900, 24);
@@ -135,38 +136,9 @@ namespace nwzip
 			// 
 			// viewToolStripMenuItem
 			// 
-			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.ViewFilesizes});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "View";
-			// 
-			// ViewFilesizes
-			// 
-			this.ViewFilesizes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.ViewFilesizesBits,
-			this.ViewFilesizesBytes});
-			this.ViewFilesizes.Name = "ViewFilesizes";
-			this.ViewFilesizes.Size = new System.Drawing.Size(115, 22);
-			this.ViewFilesizes.Text = "File Size";
-			// 
-			// ViewFilesizesBits
-			// 
-			this.ViewFilesizesBits.CheckOnClick = true;
-			this.ViewFilesizesBits.Name = "ViewFilesizesBits";
-			this.ViewFilesizesBits.Size = new System.Drawing.Size(102, 22);
-			this.ViewFilesizesBits.Text = "Bits";
-			this.ViewFilesizesBits.CheckedChanged += new System.EventHandler(this.ViewFilesizesBitsCheckedChanged);
-			// 
-			// ViewFilesizesBytes
-			// 
-			this.ViewFilesizesBytes.Checked = true;
-			this.ViewFilesizesBytes.CheckOnClick = true;
-			this.ViewFilesizesBytes.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.ViewFilesizesBytes.Name = "ViewFilesizesBytes";
-			this.ViewFilesizesBytes.Size = new System.Drawing.Size(102, 22);
-			this.ViewFilesizesBytes.Text = "Bytes";
-			this.ViewFilesizesBytes.CheckedChanged += new System.EventHandler(this.ViewFilesizesBytesCheckedChanged);
 			// 
 			// archiveToolStripMenuItem
 			// 
@@ -180,16 +152,34 @@ namespace nwzip
 			// ArchiveEncryption
 			// 
 			this.ArchiveEncryption.Name = "ArchiveEncryption";
-			this.ArchiveEncryption.Size = new System.Drawing.Size(152, 22);
+			this.ArchiveEncryption.Size = new System.Drawing.Size(131, 22);
 			this.ArchiveEncryption.Text = "Encryption";
 			this.ArchiveEncryption.Click += new System.EventHandler(this.ArchiveEncryptionClick);
 			// 
 			// ArchiveDetails
 			// 
 			this.ArchiveDetails.Name = "ArchiveDetails";
-			this.ArchiveDetails.Size = new System.Drawing.Size(152, 22);
+			this.ArchiveDetails.Size = new System.Drawing.Size(131, 22);
 			this.ArchiveDetails.Text = "Details";
 			this.ArchiveDetails.Click += new System.EventHandler(this.ArchiveDetailsClick);
+			// 
+			// nWZipToolStripMenuItem
+			// 
+			this.nWZipToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.installToolStripMenuItem});
+			this.nWZipToolStripMenuItem.Name = "nWZipToolStripMenuItem";
+			this.nWZipToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+			this.nWZipToolStripMenuItem.Text = "NWZip";
+			// 
+			// installToolStripMenuItem
+			// 
+			this.installToolStripMenuItem.Name = "installToolStripMenuItem";
+			this.installToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.installToolStripMenuItem.Text = "Install...";
+			// 
+			// backgroundWorker1
+			// 
+			this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1DoWork);
 			// 
 			// MainForm
 			// 
