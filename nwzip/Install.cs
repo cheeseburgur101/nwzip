@@ -9,6 +9,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
 
 namespace nwzip
 {
@@ -27,6 +28,22 @@ namespace nwzip
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
+			dropSelfInProgramFiles();
+		}
+		void writeFileAssociations(){
+			//Write the file associations to the registry
+		}
+		void createDesktopShortcut(){
+			//create the desktop shotrcut
+		}
+		void createStartMenuShortcut(){
+			//create the start menu shortcut.
+		}
+		void dropSelfInProgramFiles(){
+			//drops the executable into the program files.
+			string programPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+			string executablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+			File.Copy(executablePath, programPath + @"\NWZip\NWZip.exe");
 		}
 	}
 }

@@ -174,8 +174,9 @@ namespace nwzip
 			// installToolStripMenuItem
 			// 
 			this.installToolStripMenuItem.Name = "installToolStripMenuItem";
-			this.installToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+			this.installToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.installToolStripMenuItem.Text = "Install...";
+			this.installToolStripMenuItem.Click += new System.EventHandler(this.InstallToolStripMenuItemClick);
 			// 
 			// backgroundWorker1
 			// 

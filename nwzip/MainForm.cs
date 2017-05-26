@@ -54,6 +54,10 @@ namespace nwzip
 				
 			}
 		}
+		void InstallToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			Form install  = new Install();
+		}
 		
 		
 	}
