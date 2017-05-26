@@ -174,7 +174,7 @@ namespace nwzip
 			// installToolStripMenuItem
 			// 
 			this.installToolStripMenuItem.Name = "installToolStripMenuItem";
-			this.installToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.installToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
 			this.installToolStripMenuItem.Text = "Install...";
 			// 
 			// backgroundWorker1
@@ -190,7 +190,7 @@ namespace nwzip
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
-			this.Text = "NWZip Version 0.0.0 - New Archive";
+			this.Text = "NWZip Version 0.0.3 - New Archive";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
