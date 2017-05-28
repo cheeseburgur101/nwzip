@@ -92,31 +92,31 @@ namespace nwzip
 			this.SaveFile,
 			this.SaveAsFile});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
 			this.fileToolStripMenuItem.Text = "File";
 			// 
 			// NewFile
 			// 
 			this.NewFile.Name = "NewFile";
-			this.NewFile.Size = new System.Drawing.Size(123, 22);
+			this.NewFile.Size = new System.Drawing.Size(125, 22);
 			this.NewFile.Text = "New";
 			// 
 			// OpenFile
 			// 
 			this.OpenFile.Name = "OpenFile";
-			this.OpenFile.Size = new System.Drawing.Size(123, 22);
+			this.OpenFile.Size = new System.Drawing.Size(125, 22);
 			this.OpenFile.Text = "Open";
 			// 
 			// SaveFile
 			// 
 			this.SaveFile.Name = "SaveFile";
-			this.SaveFile.Size = new System.Drawing.Size(123, 22);
+			this.SaveFile.Size = new System.Drawing.Size(125, 22);
 			this.SaveFile.Text = "Save";
 			// 
 			// SaveAsFile
 			// 
 			this.SaveAsFile.Name = "SaveAsFile";
-			this.SaveAsFile.Size = new System.Drawing.Size(123, 22);
+			this.SaveAsFile.Size = new System.Drawing.Size(125, 22);
 			this.SaveAsFile.Text = "Save As...";
 			// 
 			// editToolStripMenuItem
@@ -124,20 +124,20 @@ namespace nwzip
 			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.AddFile});
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+			this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.editToolStripMenuItem.Text = "Edit";
 			// 
 			// AddFile
 			// 
 			this.AddFile.Name = "AddFile";
-			this.AddFile.Size = new System.Drawing.Size(181, 22);
+			this.AddFile.Size = new System.Drawing.Size(175, 22);
 			this.AddFile.Text = "Add File to archive...";
 			this.AddFile.Click += new System.EventHandler(this.AddFileClick);
 			// 
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
 			this.viewToolStripMenuItem.Text = "View";
 			// 
 			// archiveToolStripMenuItem
@@ -146,20 +146,20 @@ namespace nwzip
 			this.ArchiveEncryption,
 			this.ArchiveDetails});
 			this.archiveToolStripMenuItem.Name = "archiveToolStripMenuItem";
-			this.archiveToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+			this.archiveToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
 			this.archiveToolStripMenuItem.Text = "Archive";
 			// 
 			// ArchiveEncryption
 			// 
 			this.ArchiveEncryption.Name = "ArchiveEncryption";
-			this.ArchiveEncryption.Size = new System.Drawing.Size(131, 22);
+			this.ArchiveEncryption.Size = new System.Drawing.Size(125, 22);
 			this.ArchiveEncryption.Text = "Encryption";
 			this.ArchiveEncryption.Click += new System.EventHandler(this.ArchiveEncryptionClick);
 			// 
 			// ArchiveDetails
 			// 
 			this.ArchiveDetails.Name = "ArchiveDetails";
-			this.ArchiveDetails.Size = new System.Drawing.Size(131, 22);
+			this.ArchiveDetails.Size = new System.Drawing.Size(125, 22);
 			this.ArchiveDetails.Text = "Details";
 			this.ArchiveDetails.Click += new System.EventHandler(this.ArchiveDetailsClick);
 			// 
@@ -168,13 +168,13 @@ namespace nwzip
 			this.nWZipToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.installToolStripMenuItem});
 			this.nWZipToolStripMenuItem.Name = "nWZipToolStripMenuItem";
-			this.nWZipToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+			this.nWZipToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
 			this.nWZipToolStripMenuItem.Text = "NWZip";
 			// 
 			// installToolStripMenuItem
 			// 
 			this.installToolStripMenuItem.Name = "installToolStripMenuItem";
-			this.installToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.installToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
 			this.installToolStripMenuItem.Text = "Install...";
 			this.installToolStripMenuItem.Click += new System.EventHandler(this.InstallToolStripMenuItemClick);
 			// 
@@ -191,7 +191,8 @@ namespace nwzip
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
-			this.Text = "NWZip Version 0.0.3 - New Archive";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "NWZip Version 0.0.3";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);

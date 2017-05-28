@@ -56,6 +56,7 @@
     <Compile Include="Install.Designer.cs">
       <DependentUpon>Install.cs</DependentUpon>
     </Compile>
+    <Compile Include="installButtonCool.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>

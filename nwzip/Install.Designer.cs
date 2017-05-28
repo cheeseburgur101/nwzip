@@ -17,7 +17,7 @@ namespace nwzip
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.CheckBox ShortcutDesktop;
 		private System.Windows.Forms.CheckBox ShortcutStart;
-		private System.Windows.Forms.Button InstallButton;
+		private System.ComponentModel.BackgroundWorker refreshBtnT;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -44,7 +44,7 @@ namespace nwzip
 			this.label1 = new System.Windows.Forms.Label();
 			this.ShortcutDesktop = new System.Windows.Forms.CheckBox();
 			this.ShortcutStart = new System.Windows.Forms.CheckBox();
-			this.InstallButton = new System.Windows.Forms.Button();
+			this.refreshBtnT = new System.ComponentModel.BackgroundWorker();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -74,29 +74,26 @@ namespace nwzip
 			this.ShortcutStart.Text = "Place a shortcut in the Start menu";
 			this.ShortcutStart.UseVisualStyleBackColor = true;
 			// 
-			// InstallButton
+			// refreshBtnT
 			// 
-			this.InstallButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.InstallButton.Location = new System.Drawing.Point(2, 76);
-			this.InstallButton.Name = "InstallButton";
-			this.InstallButton.Size = new System.Drawing.Size(344, 44);
-			this.InstallButton.TabIndex = 3;
-			this.InstallButton.Text = "Install";
-			this.InstallButton.UseVisualStyleBackColor = true;
+			this.refreshBtnT.WorkerSupportsCancellation = true;
+			this.refreshBtnT.DoWork += new System.ComponentModel.DoWorkEventHandler(this.RefreshBtnTDoWork);
 			// 
 			// Install
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(349, 123);
-			this.Controls.Add(this.InstallButton);
 			this.Controls.Add(this.ShortcutStart);
 			this.Controls.Add(this.ShortcutDesktop);
 			this.Controls.Add(this.label1);
+			this.DoubleBuffered = true;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Install";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Install NWZip to your computer";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InstallFormClosing);
 			this.ResumeLayout(false);
 
 		}

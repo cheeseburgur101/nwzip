@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
 
 namespace nwzip
 {
@@ -19,16 +20,25 @@ namespace nwzip
 	public partial class MainForm : Form
 	{
 		int WindowToOpen = 0;
-		public MainForm()
-		{
+		string file;
+		public MainForm(){
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
+			this.file = "";
+			this.Text += " - New Archive";
+		}
+		public MainForm(string file){
+			InitializeComponent();
+			if(File.Exists(file)){
+				this.file = file;
+				//TODO: load file
+				this.Text += " - " + file;
+			}else{
+				if(file != "") MessageBox.Show("Error loading file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+				this.Text += " - New Archive";
+			}
 		}
 
 		// Add a file to the archive
@@ -57,6 +67,8 @@ namespace nwzip
 		void InstallToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			Form install  = new Install();
+			install.ShowDialog();
+			install.Dispose();
 		}
 		
 		
