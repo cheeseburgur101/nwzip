@@ -70,6 +70,10 @@ namespace nwzip
 			install.ShowDialog();
 			install.Dispose();
 		}
+		void ExitToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			Close();
+		}
 		
 		
 	}
