@@ -67,6 +67,9 @@ namespace nwzip
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.openRecentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+			this.clearRecentFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.SaveFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.SaveAsFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,14 +80,11 @@ namespace nwzip
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.archiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ArchiveEncryption = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
 			this.ArchiveDetails = new System.Windows.Forms.ToolStripMenuItem();
 			this.nWZipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.installToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-			this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-			this.clearRecentFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -146,6 +146,24 @@ namespace nwzip
 			this.openRecentToolStripMenuItem.Name = "openRecentToolStripMenuItem";
 			this.openRecentToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
 			this.openRecentToolStripMenuItem.Text = "O&pen Recent";
+			// 
+			// noneToolStripMenuItem
+			// 
+			this.noneToolStripMenuItem.Enabled = false;
+			this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
+			this.noneToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+			this.noneToolStripMenuItem.Text = "(none)";
+			// 
+			// toolStripMenuItem5
+			// 
+			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(157, 6);
+			// 
+			// clearRecentFilesToolStripMenuItem
+			// 
+			this.clearRecentFilesToolStripMenuItem.Name = "clearRecentFilesToolStripMenuItem";
+			this.clearRecentFilesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+			this.clearRecentFilesToolStripMenuItem.Text = "Clear Recent Files";
 			// 
 			// toolStripMenuItem2
 			// 
@@ -212,14 +230,19 @@ namespace nwzip
 			// ArchiveEncryption
 			// 
 			this.ArchiveEncryption.Name = "ArchiveEncryption";
-			this.ArchiveEncryption.Size = new System.Drawing.Size(152, 22);
+			this.ArchiveEncryption.Size = new System.Drawing.Size(125, 22);
 			this.ArchiveEncryption.Text = "&Encryption";
 			this.ArchiveEncryption.Click += new System.EventHandler(this.ArchiveEncryptionClick);
+			// 
+			// toolStripMenuItem4
+			// 
+			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(122, 6);
 			// 
 			// ArchiveDetails
 			// 
 			this.ArchiveDetails.Name = "ArchiveDetails";
-			this.ArchiveDetails.Size = new System.Drawing.Size(152, 22);
+			this.ArchiveDetails.Size = new System.Drawing.Size(125, 22);
 			this.ArchiveDetails.Text = "&Details";
 			this.ArchiveDetails.Click += new System.EventHandler(this.ArchiveDetailsClick);
 			// 
@@ -234,36 +257,13 @@ namespace nwzip
 			// installToolStripMenuItem
 			// 
 			this.installToolStripMenuItem.Name = "installToolStripMenuItem";
-			this.installToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.installToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
 			this.installToolStripMenuItem.Text = "&Install...";
 			this.installToolStripMenuItem.Click += new System.EventHandler(this.InstallToolStripMenuItemClick);
 			// 
 			// backgroundWorker1
 			// 
 			this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1DoWork);
-			// 
-			// toolStripMenuItem4
-			// 
-			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-			this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 6);
-			// 
-			// noneToolStripMenuItem
-			// 
-			this.noneToolStripMenuItem.Enabled = false;
-			this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-			this.noneToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-			this.noneToolStripMenuItem.Text = "(none)";
-			// 
-			// toolStripMenuItem5
-			// 
-			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-			this.toolStripMenuItem5.Size = new System.Drawing.Size(157, 6);
-			// 
-			// clearRecentFilesToolStripMenuItem
-			// 
-			this.clearRecentFilesToolStripMenuItem.Name = "clearRecentFilesToolStripMenuItem";
-			this.clearRecentFilesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-			this.clearRecentFilesToolStripMenuItem.Text = "Clear Recent Files";
 			// 
 			// MainForm
 			// 
@@ -275,7 +275,7 @@ namespace nwzip
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "NWZip Version 0.0.3";
+			this.Text = "NWZip ";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);

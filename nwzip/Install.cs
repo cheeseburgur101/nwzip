@@ -41,11 +41,7 @@ namespace nwzip
 			installButtonC.Click += InstallButtonClick;
 			installButtonC.TabIndex = 0;
 			this.Controls.Add(installButtonC);
-			try{
-				refreshBtnT.RunWorkerAsync();
-			}catch(Exception ex){
-				
-			}
+			if(!refreshBtnT.IsBusy) refreshBtnT.RunWorkerAsync();
 			installButtonC.Select();
 			installButtonC.Focus();
 		}
@@ -122,12 +118,12 @@ namespace nwzip
 			//create the desktop shotrcut (TODO testing (messagebox the strings))
 			string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			string programPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-			return shortcutHelper.createShortcut(programPath + @"\NWZip\NWZip.exe", "NWZip Program", desktop + @"\NWZip.lnk");
+			return shortcutHelper.createShortcut(programPath + @"\NWZip\NWZip.exe", "NWZip Archiver Program", desktop + @"\NWZip.lnk", true);
 		}
 		errorReport createStartMenuShortcut(){
 			//create the start menu shortcut. (TODO testing (messagebox the strings))
 			string programPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-			return shortcutHelper.createShortcut(programPath + @"\NWZip\NWZip.exe", "NWZip Program", programPath.Split(':')[0] + @":\ProgramData\Microsoft\Windows\Start Menu\Programs\NWZip.lnk");
+			return shortcutHelper.createShortcut(programPath + @"\NWZip\NWZip.exe", "NWZip Archiver Program", programPath.Split(':')[0] + @":\ProgramData\Microsoft\Windows\Start Menu\Programs\NWZip.lnk", true);
 		}
 		errorReport dropSelfInProgramFiles(){
 			//drops items into the program files. (overwrites files)

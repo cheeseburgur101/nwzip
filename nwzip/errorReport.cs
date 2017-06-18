@@ -16,7 +16,7 @@ namespace nwzip
 	/// </summary>
 	public class errorReport
 	{
-		public readonly int status;
+		public readonly uint status;
 		public readonly string error;
 		//default, no error (constructor)
 		public errorReport(){
@@ -24,11 +24,11 @@ namespace nwzip
 			error = "Success";
 		}
 		//error status, no message
-		public errorReport(int status){
+		public errorReport(uint status){
 			this.status = status;
 		}
 		//error status, and message
-		public errorReport(int status, string error){
+		public errorReport(uint status, string error){
 			this.status = status;
 			this.error = error;
 		}
