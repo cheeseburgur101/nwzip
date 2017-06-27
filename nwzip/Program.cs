@@ -17,6 +17,10 @@ namespace nwzip
 	/// </summary>
 	internal sealed class Program
 	{
+		public readonly static int versionMajor = 0;
+		public readonly static int versionMiddle1 = 0;
+		public readonly static int versionMiddle2 = 1;
+		public readonly static int versionMinor = 0;
 		/// <summary>
 		/// Program entry point.
 		/// </summary>
@@ -37,6 +41,10 @@ namespace nwzip
 				}
 			}
 			Application.Run(new MainForm(fileToRun));
+		}
+		
+		public static string versionString(){
+			return "Version " + versionMajor + "." + versionMiddle1 + "." +versionMiddle2 + "." + versionMinor;
 		}
 		
 	}

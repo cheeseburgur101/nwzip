@@ -27,10 +27,12 @@ namespace nwzip
 			//
 			InitializeComponent();
 			this.file = "";
+			this.Text += Program.versionString();
 			this.Text += " - New Archive";
 		}
 		public MainForm(string file){
 			InitializeComponent();
+			this.Text += Program.versionString();
 			if(File.Exists(file)){
 				this.file = file;
 				//TODO: load file
@@ -69,6 +71,10 @@ namespace nwzip
 			Form install  = new Install();
 			install.ShowDialog();
 			install.Dispose();
+		}
+		void ExitToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			Close();
 		}
 		
 		
