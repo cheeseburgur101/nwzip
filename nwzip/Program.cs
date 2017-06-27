@@ -20,7 +20,7 @@ namespace nwzip
 		public readonly static int versionMajor = 0;
 		public readonly static int versionMiddle1 = 0;
 		public readonly static int versionMiddle2 = 1;
-		public readonly static int versionMinor = 0;
+		public readonly static int versionMinor = 1;
 		/// <summary>
 		/// Program entry point.
 		/// </summary>
@@ -46,6 +46,8 @@ namespace nwzip
 		public static string versionString(){
 			return "Version " + versionMajor + "." + versionMiddle1 + "." +versionMiddle2 + "." + versionMinor;
 		}
+		
+
 		
 	}
 }

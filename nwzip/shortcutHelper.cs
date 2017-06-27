@@ -42,7 +42,9 @@ namespace nwzip{
 			if(shortcutPath.Length > MAX_PATH) retVal = new errorReport(1, "Your system does not support this program installing shortcuts.");
 			//get heap for later memory allocation
 			void* prcHeap = GetProcessHeap();
-			char* wsz = (char*)HeapAlloc(prcHeap, HEAP_ZERO_MEMORY, (ulong)(sizeof(byte) * (MAX_PATH + 1))); //allocate space for WCHARs
+			char* wsz = (char*)0;
+			if(prcHeap != (void*)0) wsz = (char*)HeapAlloc(prcHeap, HEAP_ZERO_MEMORY, (ulong)(sizeof(char) * (MAX_PATH + 1))); //allocate space for WCHARs
+			if(prcHeap == (void*)0) retVal = new errorReport(1, "Error creating shortcuts. Try restarting the program. Running it as administrator may also help.");
 			if(wsz == (char*)0) retVal = new errorReport(1, "Error creating shortcuts. Try restarting the program. Running it as administrator may also help.");
 			if(retVal.status == 0){
 				if(prcHeap != (void*)0){

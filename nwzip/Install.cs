@@ -115,13 +115,13 @@ namespace nwzip
 			
 		}
 		errorReport createDesktopShortcut(){
-			//create the desktop shotrcut (TODO testing (messagebox the strings))
+			//create the desktop shotrcut
 			string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			string programPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
 			return shortcutHelper.createShortcut(programPath + @"\NWZip\NWZip.exe", "NWZip Archiver Program", desktop + @"\NWZip.lnk", true);
 		}
 		errorReport createStartMenuShortcut(){
-			//create the start menu shortcut. (TODO testing (messagebox the strings))
+			//create the start menu shortcut.
 			string programPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
 			return shortcutHelper.createShortcut(programPath + @"\NWZip\NWZip.exe", "NWZip Archiver Program", programPath.Split(':')[0] + @":\ProgramData\Microsoft\Windows\Start Menu\Programs\NWZip.lnk", true);
 		}
