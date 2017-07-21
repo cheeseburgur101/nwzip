@@ -81,6 +81,7 @@ namespace nwzip
 		private System.Windows.Forms.ToolStripMenuItem onlyIfEmptyToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem navigateToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
+		private System.Windows.Forms.Button btnUpOne;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -165,6 +166,7 @@ namespace nwzip
 			this.recursivelyRecommendedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.onlyIfEmptyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.lblDirectoryHierarchy = new System.Windows.Forms.Label();
+			this.btnUpOne = new System.Windows.Forms.Button();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.btnExtract = new System.Windows.Forms.Button();
 			this.btnOpen = new System.Windows.Forms.Button();
@@ -389,7 +391,7 @@ namespace nwzip
 			this.listView1.MultiSelect = false;
 			this.listView1.Name = "listView1";
 			this.listView1.Size = new System.Drawing.Size(665, 374);
-			this.listView1.TabIndex = 8;
+			this.listView1.TabIndex = 9;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
 			this.listView1.DoubleClick += new System.EventHandler(this.ListView1DoubleClick);
@@ -558,9 +560,9 @@ namespace nwzip
 			// 
 			this.txtNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtNavigate.Location = new System.Drawing.Point(14, 26);
+			this.txtNavigate.Location = new System.Drawing.Point(61, 26);
 			this.txtNavigate.Name = "txtNavigate";
-			this.txtNavigate.Size = new System.Drawing.Size(582, 20);
+			this.txtNavigate.Size = new System.Drawing.Size(535, 20);
 			this.txtNavigate.TabIndex = 0;
 			this.txtNavigate.Text = "/";
 			this.txtNavigate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNavigateKeyPress);
@@ -590,6 +592,7 @@ namespace nwzip
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.btnUpOne);
 			this.splitContainer1.Panel2.Controls.Add(this.comboBox1);
 			this.splitContainer1.Panel2.Controls.Add(this.btnExtract);
 			this.splitContainer1.Panel2.Controls.Add(this.btnOpen);
@@ -672,6 +675,17 @@ namespace nwzip
 			this.lblDirectoryHierarchy.Size = new System.Drawing.Size(97, 13);
 			this.lblDirectoryHierarchy.TabIndex = 1;
 			this.lblDirectoryHierarchy.Text = "Directory Hierarchy";
+			// 
+			// btnUpOne
+			// 
+			this.btnUpOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnUpOne.Location = new System.Drawing.Point(14, 26);
+			this.btnUpOne.Name = "btnUpOne";
+			this.btnUpOne.Size = new System.Drawing.Size(41, 23);
+			this.btnUpOne.TabIndex = 8;
+			this.btnUpOne.Text = "..";
+			this.btnUpOne.UseVisualStyleBackColor = true;
+			this.btnUpOne.Click += new System.EventHandler(this.Button1Click);
 			// 
 			// comboBox1
 			// 

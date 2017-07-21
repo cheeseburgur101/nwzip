@@ -40,6 +40,7 @@ namespace nwzip
 					Process.Start(executablePath, args[i]);
 				}
 			}
+			
 			Application.Run(new MainForm(fileToRun));
 		}
 		

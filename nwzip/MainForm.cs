@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Resources;
 
 namespace nwzip
 {
@@ -29,6 +30,9 @@ namespace nwzip
 		string[] files;
 		
 		sizeModifier szMod;
+		
+		ImageList imagesSmall; //image lists for icons in listview
+		ImageList imagesLarge;
 		
 		public enum sizeModifier {
 			Bytes,
@@ -107,6 +111,23 @@ namespace nwzip
 			directories = new string[]{};
 			
 			szMod = sizeModifier.Thousand24;
+			
+			imagesSmall = new ImageList();
+			imagesLarge = new ImageList();
+			
+			ResourceManager rm = new ResourceManager("nwzip.MainForm", typeof(MainForm).Assembly);
+			
+			imagesSmall.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown16"));
+			imagesSmall.Images.Add("folder", (Bitmap)rm.GetObject("folder16"));
+			
+			imagesLarge.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown64"));
+			imagesLarge.Images.Add("folder", (Bitmap)rm.GetObject("folder64"));
+			
+			imagesSmall.ImageSize = new Size(16, 16);
+			imagesLarge.ImageSize = new Size(64, 64);
+			
+			listView1.SmallImageList = imagesSmall;
+			listView1.LargeImageList = imagesLarge;
 		}
 		int numSlashes(string a){ //returns the number of forward slashes
 			int b = 0;
@@ -131,7 +152,44 @@ namespace nwzip
 			}
 		}
 		void updateTreeView(){ //completely resets the treeView for all directories
-			//TODO
+			treeView1.Nodes.Clear();
+			updateTreeView2(treeView1.Nodes, 0);
+		}
+		void updateTreeView2(TreeNodeCollection tnc, int level){
+			if(level == 0){
+				tnc.Clear();
+				tnc.Add("/");
+				updateTreeView2(tnc, level + 1);
+			}else{
+				for(int j = 0; j < tnc.Count; ++j){
+					for(int i = 0; i < directories.Length; ++i){
+						if(numSlashes(directories[i]) == level){
+							if(directories[i].StartsWith(tnc[j].Text, StringComparison.CurrentCulture)){
+								//if(!tnc[j].Nodes.Contains(new TreeNode(directories[i]))){
+								if(!nodesContains(tnc[j].Nodes, directories[i], true)){
+									tnc[j].Nodes.Add(directories[i]);
+									updateTreeView2(tnc[j].Nodes, level + 1);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		bool nodesContains(TreeNodeCollection tnc, string cmpstr, bool caseSensitive){
+			bool f = false;
+			for(int i = 0; i < tnc.Count; ++i){
+				if(caseSensitive){
+					if(tnc[i].Text == cmpstr){
+						f = true;
+					}
+				}else{
+					if(tnc[i].Text.ToLower() == cmpstr.ToLower()){
+						f = true;
+					}
+				}
+			}
+			return f;
 		}
 		void updateListView(){ //completely resets the listView for the currentDirectory in the Archive
 			//TODO display alphabetically, and icons with different views
@@ -153,6 +211,7 @@ namespace nwzip
 						lvi.Text = stripSlashes(ndirectory);
 						lvi.SubItems.Add("Folder");
 						lvi.SubItems.Add("");
+						lvi.ImageKey = "folder";
 						listView1.Items.Add(lvi);
 					}
 				}
@@ -169,6 +228,7 @@ namespace nwzip
 						lvi.Text = stripSlashes(files[i]);
 						lvi.SubItems.Add("Binary Data/Unknown"); //TODO (maybe function for extension analysis, or magic number analysis before adding the file to the archive)
 						lvi.SubItems.Add("Unimplemented feature"); //TODO szMod (Bytes: display size in bytes (eg 134568645 bytes displayed as "134568645"); Thousand: 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, etc (eg 4 bytes: display "4 bytes", 4000 bytes: display "4Kb", 4000000 bytes: display "4Mb"); Thousand24: 1024 bytes = 1 kilobyte, 1024 kilobytes = 1 megabyte, etc (eg 4 bytes: display "4 bytes", 4096 bytes: display "4Kb", 4194304 bytes: display "4Mb")
+						lvi.ImageKey = "binary-unknown";
 						listView1.Items.Add(lvi);
 					}
 				}
@@ -358,13 +418,7 @@ namespace nwzip
 		}
 		void TreeView1DoubleClick(object sender, EventArgs e)
 		{
-			try{
-				txtNavigate.Text = treeView1.SelectedNode.Text;
-				currentDirInArchive = txtNavigate.Text;
-				btnGo.PerformClick();
-			}catch(Exception ex){
-				//if it fails somehow, do not call MessageBox.Show
-			}
+			
 		}
 		void DeleteFolderToolStripMenuItemClick(object sender, EventArgs e) //treeView > DeleteFolder[]
 		{
@@ -414,7 +468,13 @@ namespace nwzip
 		}
 		void TreeView1AfterSelect(object sender, TreeViewEventArgs e)
 		{
-	
+			try{
+				txtNavigate.Text = treeView1.SelectedNode.Text;
+				currentDirInArchive = txtNavigate.Text;
+				btnGo.PerformClick();
+			}catch(Exception ex){
+				//if it fails somehow, do not call MessageBox.Show
+			}
 		}
 		void BtnExtractClick(object sender, EventArgs e)
 		{
@@ -541,6 +601,23 @@ namespace nwzip
 					//TODO call save method (line below is probably temporary)
 					btnSave.PerformClick();
 				}
+			}
+		}
+		void Button1Click(object sender, EventArgs e) //up one level (navigate)
+		{
+			try{
+				string newCD = currentDirInArchive;
+				newCD = newCD.Replace("\\", "/");
+				if(newCD.EndsWith("/", StringComparison.CurrentCulture)) newCD = newCD.Substring(0, newCD.Length - 1);
+				if(newCD.Length != 0){
+					while(!newCD.EndsWith("/", StringComparison.CurrentCulture)){
+						newCD = newCD.Substring(0, newCD.Length - 1);
+					}
+					txtNavigate.Text = newCD;
+					btnGo.PerformClick();
+				}
+			}catch(Exception ex){
+				//no messagebox
 			}
 		}
 		
