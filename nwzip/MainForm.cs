@@ -12,6 +12,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Resources;
+using Microsoft.Win32;
+using System.Runtime.InteropServices;
 
 namespace nwzip
 {
@@ -29,10 +31,26 @@ namespace nwzip
 		string[] directories; //probably temporary arrays
 		string[] files;
 		
+		Dictionary<string, string> filesTypes;
+		
 		sizeModifier szMod;
 		
 		ImageList imagesSmall; //image lists for icons in listview
 		ImageList imagesLarge;
+		
+		//imports for icon getting
+		[DllImport("shell32.dll", EntryPoint="SHGetFileInfo")]
+		public unsafe extern static void* SHGetFileInfo(string pszPath, UInt32 dwFileAttributes, ref SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
+		[DllImport("user32.dll", EntryPoint="DestroyIcon")]
+		public unsafe extern static bool DestroyIcon(void* hIcon);
+		
+		public unsafe struct SHFILEINFO {
+			public void* hIcon;
+			public int iIcon;
+			public UInt32 dwAttributes;
+			public fixed char szDisplayName[260];
+			public fixed char szTypeName[80];
+		}
 		
 		public enum sizeModifier {
 			Bytes,
@@ -128,6 +146,8 @@ namespace nwzip
 			
 			listView1.SmallImageList = imagesSmall;
 			listView1.LargeImageList = imagesLarge;
+			
+			filesTypes = new Dictionary<string, string>();
 		}
 		int numSlashes(string a){ //returns the number of forward slashes
 			int b = 0;
@@ -226,15 +246,112 @@ namespace nwzip
 					if((numSlashes(currentDirInArchiveSE)) == (numSlashes(files[i]))){
 						ListViewItem lvi = new ListViewItem();
 						lvi.Text = stripSlashes(files[i]);
-						lvi.SubItems.Add("Binary Data/Unknown"); //TODO (maybe function for extension analysis, or magic number analysis before adding the file to the archive)
+						lvi.SubItems.Add(fileTypeFromRegistry(stripSlashes(files[i]))); //get file type from registry
 						lvi.SubItems.Add("Unimplemented feature"); //TODO szMod (Bytes: display size in bytes (eg 134568645 bytes displayed as "134568645"); Thousand: 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, etc (eg 4 bytes: display "4 bytes", 4000 bytes: display "4Kb", 4000000 bytes: display "4Mb"); Thousand24: 1024 bytes = 1 kilobyte, 1024 kilobytes = 1 megabyte, etc (eg 4 bytes: display "4 bytes", 4096 bytes: display "4Kb", 4194304 bytes: display "4Mb")
-						lvi.ImageKey = "binary-unknown";
+						lvi.ImageKey = resolveFileIconFromExtension(stripSlashes(files[i]));
 						listView1.Items.Add(lvi);
 					}
 				}
 			}
 		}
 
+		string fileExtensionFromFileName(string filename){
+			string retVal = filename;
+			while(retVal.Contains(".")){
+				retVal = retVal.Substring(1);
+		 	}
+			return "." + retVal;
+		}
+		
+		unsafe string resolveFileIconFromExtension(string filename){
+			string retVal = "binary-unknown"; //default value (if error)
+			string dfiletype = "-" + fileExtensionFromFileName(filename);
+			if(iconListsContains(dfiletype)) return dfiletype; //already exists in icon lists, no need to get it again
+			//get icon from file from shgetfileinfo
+			if(filename.Contains(".")){
+				try{
+					string fext = fileExtensionFromFileName(filename);
+					SHFILEINFO shfi = new SHFILEINFO(); //define a SHFILEINFO
+					shfi.dwAttributes = 0; //clear structure
+					shfi.hIcon = (void*)0;
+					shfi.iIcon = 0;
+					for(int i = 0; i < 260; ++i){
+						shfi.szDisplayName[i] = (char)0;
+					}
+					for(int i = 0; i < 80; ++i){
+						shfi.szTypeName[i] = (char)0;
+					}
+					//get large icon
+					if(SHGetFileInfo(fext, 0x80 /*FILE_ATTRIBUTE_NORMAL*/, ref shfi, (uint)Marshal.SizeOf(shfi), (uint)(0x100 /*SHGFI_ICON*/ | 0x10 /*SHGFI_USEFILEATTRIBUTES*/)) != (void*)0){
+						Icon icoGet = (Icon)Icon.FromHandle((IntPtr)shfi.hIcon).Clone(); //copy into new object
+						imagesLarge.Images.Add(dfiletype, icoGet.ToBitmap()); //add for future reference
+						retVal = dfiletype; //change return value
+						DestroyIcon(shfi.hIcon); //free memory
+					}
+					shfi = new SHFILEINFO();
+					shfi.dwAttributes = 0; //reset SHFILEINFO structure
+					shfi.hIcon = (void*)0;
+					shfi.iIcon = 0;
+					for(int i = 0; i < 260; ++i){
+						shfi.szDisplayName[i] = (char)0;
+					}
+					for(int i = 0; i < 80; ++i){
+						shfi.szTypeName[i] = (char)0;
+					}
+					//get small icon
+					if(SHGetFileInfo(fext, 0x80 /*FILE_ATTRIBUTE_NORMAL*/, ref shfi, (uint)Marshal.SizeOf(shfi), (uint)(0x100 /*SHGFI_ICON*/ | 0x10 /*SHGFI_USEFILEATTRIBUTES*/ | 0x01 /*SHGFI_SMALLICON*/)) != (void*)0){
+						Icon icoGet = (Icon)Icon.FromHandle((IntPtr)shfi.hIcon).Clone(); //copy into new object
+						imagesSmall.Images.Add(dfiletype, icoGet.ToBitmap()); //add for future reference
+						retVal = dfiletype; //change return value
+						DestroyIcon(shfi.hIcon); //free memory
+					}
+				}catch(Exception ex){
+					//do nothing
+			   	}
+			}
+			return retVal;
+		}
+		
+		bool iconListsContains(string imageKey){
+			if(imagesSmall.Images.ContainsKey(imageKey)) return true;
+			if(imagesLarge.Images.ContainsKey(imageKey)) return true;
+			
+			return false;
+		}
+		
+		string fileTypeFromRegistry(string filename){
+			string retVal = "Binary Data/Unknown"; //default value (if error)
+			if(filename.Contains(".")){
+				if(filesTypes.ContainsKey(fileExtensionFromFileName(filename))){ //if already resolved
+					retVal = filesTypes[fileExtensionFromFileName(filename)]; //return result
+				}else{
+				   	//search in registry HKEY_CLASSES_ROOT
+				   	//get file type
+				   	try{	
+				   		string newPointer = "";
+				   		bool worked = false;
+				   		RegistryKey rk = Registry.ClassesRoot.OpenSubKey(fileExtensionFromFileName(filename), false);
+						if(rk != null){
+				   			newPointer = (string)rk.GetValue("");
+							rk.Close();
+							worked = true;
+						}
+				   		if(worked){
+				   			rk = Registry.ClassesRoot.OpenSubKey(newPointer, false);
+				   			if(rk != null){
+				   				retVal = (string)rk.GetValue("");
+				   				filesTypes[fileExtensionFromFileName(filename)] = retVal; //save for later
+				   				rk.Close();
+				   			}
+				   		}
+					}catch(Exception ex){
+						//do nothing
+					}
+				}
+			}
+			return retVal;
+		}
+		
 		// Add a file to the archive
 		void AddFileClick(object sender, EventArgs e) //Edit > Add File to archive...
 		{

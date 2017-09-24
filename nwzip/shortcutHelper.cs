@@ -216,11 +216,11 @@ namespace nwzip{
 		public unsafe extern static bool HeapFree(void* hHeap, UInt32 dwFlags, void* lpMem);
 		
 		//ole32
-		[DllImport("C:\\Windows\\SysWOW64\\ole32.dll", EntryPoint="CoInitialize")]
+		[DllImport("ole32.dll", EntryPoint="CoInitialize")]
 		public extern static int CoInitialize(UIntPtr reserved);
-		[DllImport("C:\\Windows\\SysWOW64\\ole32.dll", EntryPoint = "CoUninitialize")]
+		[DllImport("ole32.dll", EntryPoint = "CoUninitialize")]
 		public extern static void CoUninitialize();
-		[DllImport("C:\\Windows\\SysWOW64\\ole32.dll", EntryPoint = "CoCreateInstance")]
+		[DllImport("ole32.dll", EntryPoint = "CoCreateInstance")]
 		public extern unsafe static int CoCreateInstance(Guid* rclsid, void* pUnkOuter, UInt32 dwClsContext, Guid* riid, void* ppv);
 		
 		//misc
