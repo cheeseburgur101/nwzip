@@ -88,6 +88,12 @@ namespace nwzip
 							f.archivePath = Encoding.UTF8.GetString(data.Skip(i+2).Take(pLength).ToArray());
 							i+=1+pLength;
 							break;
+						default:
+							// Unknown identifier.
+							MessageBox.Show("Unknown identifier " + data[i] + " when loading archive");
+							int unknownLength = data[i+1];
+							i+=unknownLength;
+							break;
 					}
 				}
 				files.Add(f);
