@@ -132,8 +132,8 @@ namespace nwzip
 				string programPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
 				string executablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
 				if(!Directory.Exists(programPath + @"\NWZip")) Directory.CreateDirectory(programPath + @"\NWZip");
-				if(File.Exists(programPath + @"\NWZip\NWZip.exe")) File.Delete(programPath + @"\NWZip\NWZip.exe");
-				File.Copy(executablePath, programPath + @"\NWZip\NWZip.exe");
+				if(System.IO.File.Exists(programPath + @"\NWZip\NWZip.exe")) System.IO.File.Delete(programPath + @"\NWZip\NWZip.exe");
+				System.IO.File.Copy(executablePath, programPath + @"\NWZip\NWZip.exe");
 			}catch(Exception ex){
 				returnValue = new errorReport(1, ex.Message + "\r\nTry running the program again as administrator.");
 			}

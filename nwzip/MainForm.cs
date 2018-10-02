@@ -21,6 +21,9 @@ namespace nwzip
 	{
 		int WindowToOpen = 0;
 		string file;
+		
+		Archive archive;
+		
 		public MainForm(){
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -33,7 +36,7 @@ namespace nwzip
 		public MainForm(string file){
 			InitializeComponent();
 			this.Text += Program.versionString();
-			if(File.Exists(file)){
+			if(System.IO.File.Exists(file)){
 				this.file = file;
 				//TODO: load file
 				this.Text += " - " + file;
@@ -76,7 +79,25 @@ namespace nwzip
 		{
 			Close();
 		}
+		void OpenFileClick(object sender, EventArgs e)
+		{
+			if(openFileDialog.ShowDialog()!=DialogResult.OK){
+				// User closed the dialog
+				return;
+			}
+			
+			string file = openFileDialog.FileName;
+			
+			archive = new Archive(file);
+			displayArchive();
+		}
 		
-		
+		public void displayArchive(){
+			List<File> files = archive.getFiles();
+			foreach(File f in files){
+				ListViewItem lvi = new ListViewItem(f.archivePath);
+				fileList.Items.Add(lvi);
+			}
+		}
 	}
 }
