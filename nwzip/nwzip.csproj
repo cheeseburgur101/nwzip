@@ -65,7 +65,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archive.cs" />
     <Compile Include="errorReport.cs" />
+    <Compile Include="File.cs" />
     <Compile Include="Install.cs" />
     <Compile Include="Install.Designer.cs">
       <DependentUpon>Install.cs</DependentUpon>

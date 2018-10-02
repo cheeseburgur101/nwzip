@@ -24,26 +24,19 @@ namespace nwzip
 	{
 		int WindowToOpen = 0;
 		string file;
-		
 		string currentDirInArchive;
 		bool hasArchiveChanged; //Use this variable when showing a warning for clicking the 'New Archive' or 'Open Archive' button (or when doing any other action that would close the archive, such as clicking the 'X' button). Set it to false when archive gets saved by some function. Set it to true when the archive got changed in any way, shape, or form.
-		
 		string[] directories; //probably temporary arrays
 		string[] files;
-		
 		Dictionary<string, string> filesTypes;
-		
 		sizeModifier szMod;
-		
 		ImageList imagesSmall; //image lists for icons in listview
 		ImageList imagesLarge;
-		
 		//imports for icon getting
 		[DllImport("shell32.dll", EntryPoint="SHGetFileInfo")]
 		public unsafe extern static void* SHGetFileInfo(string pszPath, UInt32 dwFileAttributes, ref SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
 		[DllImport("user32.dll", EntryPoint="DestroyIcon")]
 		public unsafe extern static bool DestroyIcon(void* hIcon);
-		
 		public unsafe struct SHFILEINFO {
 			public void* hIcon;
 			public int iIcon;
@@ -51,13 +44,11 @@ namespace nwzip
 			public fixed char szDisplayName[260];
 			public fixed char szTypeName[80];
 		}
-		
 		public enum sizeModifier {
 			Bytes,
 			Thousand,
 			Thousand24
 		}
-		
 		public MainForm(){
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -72,7 +63,7 @@ namespace nwzip
 		public MainForm(string file){
 			InitializeComponent();
 			this.Text += Program.versionString();
-			if(File.Exists(file)){
+			if(System.IO.File.Exists(file)){
 				this.file = file;
 				//TODO: load file
 				this.Text += " - " + file;
@@ -105,7 +96,7 @@ namespace nwzip
 		void updateMainWindowTitle(){ //completely reset the mainWindow title
 			this.Text = "NWZip ";
 			this.Text += Program.versionString();
-			if(File.Exists(this.file)){
+			if(System.IO.File.Exists(this.file)){
 				this.Text += " - " + this.file;
 			}else{
 				this.Text += " - New Archive";
@@ -134,12 +125,12 @@ namespace nwzip
 			imagesLarge = new ImageList();
 			
 			ResourceManager rm = new ResourceManager("nwzip.MainForm", typeof(MainForm).Assembly);
+
+			//imagesSmall.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown16"));
+			//imagesSmall.Images.Add("folder", (Bitmap)rm.GetObject("folder16"));
 			
-			imagesSmall.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown16"));
-			imagesSmall.Images.Add("folder", (Bitmap)rm.GetObject("folder16"));
-			
-			imagesLarge.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown64"));
-			imagesLarge.Images.Add("folder", (Bitmap)rm.GetObject("folder64"));
+			//imagesLarge.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown64"));
+			//imagesLarge.Images.Add("folder", (Bitmap)rm.GetObject("folder64"));
 			
 			imagesSmall.ImageSize = new Size(16, 16);
 			imagesLarge.ImageSize = new Size(64, 64);
@@ -254,7 +245,6 @@ namespace nwzip
 				}
 			}
 		}
-
 		string fileExtensionFromFileName(string filename){
 			string retVal = filename;
 			while(retVal.Contains(".")){
@@ -262,7 +252,6 @@ namespace nwzip
 		 	}
 			return "." + retVal;
 		}
-		
 		unsafe string resolveFileIconFromExtension(string filename){
 			string retVal = "binary-unknown"; //default value (if error)
 			string dfiletype = "-" + fileExtensionFromFileName(filename);
@@ -311,14 +300,12 @@ namespace nwzip
 			}
 			return retVal;
 		}
-		
 		bool iconListsContains(string imageKey){
 			if(imagesSmall.Images.ContainsKey(imageKey)) return true;
 			if(imagesLarge.Images.ContainsKey(imageKey)) return true;
 			
 			return false;
 		}
-		
 		string fileTypeFromRegistry(string filename){
 			string retVal = "Binary Data/Unknown"; //default value (if error)
 			if(filename.Contains(".")){
@@ -351,20 +338,17 @@ namespace nwzip
 			}
 			return retVal;
 		}
-		
 		// Add a file to the archive
 		void AddFileClick(object sender, EventArgs e) //Edit > Add File to archive...
 		{
 			btnAddFile.PerformClick();
 		}
-		
 		// open the archive encryption window
 		void ArchiveEncryptionClick(object sender, EventArgs e) //Archive > Encryption
 		{
 			errorReport a = new errorReport(1, "Unimplemented feature.");
 			a.messageBoxE();
 		}
-		
 		// open the archive details window
 		void ArchiveDetailsClick(object sender, EventArgs e) //Archive > Details
 		{
@@ -394,8 +378,7 @@ namespace nwzip
 		}
 		void BtnOpenClick(object sender, EventArgs e)
 		{
-			errorReport a = new errorReport(1, "Unimplemented feature.");
-			a.messageBoxE();
+			OpenFileClick(sender, e);
 		}
 		void BtnGoClick(object sender, EventArgs e)
 		{
@@ -575,8 +558,41 @@ namespace nwzip
 		}
 		void OpenFileClick(object sender, EventArgs e) //File > Open
 		{
-			errorReport a = new errorReport(1, "Unimplemented feature.");
-			a.messageBoxE();
+			if(openArchiveDialog.ShowDialog()!=DialogResult.OK){
+				// operation was canceled by user
+				return;
+			}
+			
+			files = new string[0];
+			directories = new string[0];
+			
+			Archive a = new Archive(openArchiveDialog.FileName);
+			
+			List<File> aFiles = a.getFiles();
+			List<string> aDirectories = new List<string>();
+			files = new string[aFiles.Count];
+			for(int i = 0; i < aFiles.Count; i++){
+				files[i] = aFiles[i].archivePath;
+				string[] parts = aFiles[i].archivePath.Split('/');
+				for(int j = 0; j < parts.Length; j++){
+					string currentDir = "";
+					for(int k = 1; k <= i+1; k++){
+						currentDir += parts[k];
+					}
+					aDirectories.Add("/" + currentDir);
+				}
+				foreach(string dir in aDirectories){
+					bool exists = false;
+					foreach(string edir in directories){
+						if(dir==edir) exists = true;
+					}
+					if(!exists){
+						Array.Resize(ref directories, directories.Length+1);
+						directories[directories.Length-1] = dir;
+					}
+				}
+			}
+			updateListView();
 		}
 		void SaveAsFileClick(object sender, EventArgs e) //File > Save As
 		{
@@ -737,7 +753,5 @@ namespace nwzip
 				//no messagebox
 			}
 		}
-		
-		
 	}
 }

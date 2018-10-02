@@ -25,14 +25,14 @@ namespace nwzip{
 			//handle overwriting
 			if(overwrite){
 				try{
-					if(File.Exists(shortcutPath)){
-						File.Delete(shortcutPath);
+					if(System.IO.File.Exists(shortcutPath)){
+						System.IO.File.Delete(shortcutPath);
 					}
 				}catch(Exception ex){
 					retVal = new errorReport(1, ex.Message + "\r\nCould not overwrite the shortcut. Try running the program again as administrator.");
 				}
 			}else{
-				if(File.Exists(shortcutPath)){
+				if(System.IO.File.Exists(shortcutPath)){
 					retVal = new errorReport(1, "Can't overwrite the shortcut.");
 				}
 			}
