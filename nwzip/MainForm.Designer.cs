@@ -37,7 +37,6 @@ namespace nwzip
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
 		private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
-		private System.Windows.Forms.ToolStripMenuItem clearRecentFilesToolStripMenuItem;
 		private System.Windows.Forms.ListView listView1;
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -83,7 +82,6 @@ namespace nwzip
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
 		private System.Windows.Forms.Button btnUpOne;
 		private System.Windows.Forms.OpenFileDialog openArchiveDialog;
-		
 		/// <summary>
 		/// Disposes resources used by the form.
 		/// </summary>
@@ -177,6 +175,7 @@ namespace nwzip
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.openArchiveDialog = new System.Windows.Forms.OpenFileDialog();
+
 			this.menuStrip1.SuspendLayout();
 			this.contextMenuListView.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -196,7 +195,7 @@ namespace nwzip
 			this.nWZipToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(900, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(846, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -264,7 +263,6 @@ namespace nwzip
 			this.clearRecentFilesToolStripMenuItem.Name = "clearRecentFilesToolStripMenuItem";
 			this.clearRecentFilesToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.clearRecentFilesToolStripMenuItem.Text = "Clear Recent Archives";
-			this.clearRecentFilesToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFilesToolStripMenuItemClick);
 			// 
 			// toolStripMenuItem2
 			// 
