@@ -126,11 +126,11 @@ namespace nwzip
 			
 			ResourceManager rm = new ResourceManager("nwzip.MainForm", typeof(MainForm).Assembly);
 
-			//imagesSmall.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown16"));
-			//imagesSmall.Images.Add("folder", (Bitmap)rm.GetObject("folder16"));
+			imagesSmall.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown16"));
+			imagesSmall.Images.Add("folder", (Bitmap)rm.GetObject("folder16"));
 			
-			//imagesLarge.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown64"));
-			//imagesLarge.Images.Add("folder", (Bitmap)rm.GetObject("folder64"));
+			imagesLarge.Images.Add("binary-unknown", (Bitmap)rm.GetObject("binary-unknown64"));
+			imagesLarge.Images.Add("folder", (Bitmap)rm.GetObject("folder64"));
 			
 			imagesSmall.ImageSize = new Size(16, 16);
 			imagesLarge.ImageSize = new Size(64, 64);
