@@ -19,7 +19,6 @@ namespace nwzip
 		// Common variables
 		public string fileTypeName;
 		public string fileType;
-		Metadata metadata;
 		
 		// Local variables
 		public string localPath;
